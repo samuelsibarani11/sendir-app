@@ -1,36 +1,56 @@
 import { Tabs } from 'expo-router';
 import { Ionicons } from "@expo/vector-icons";
+import { FontAwesome5 } from '@expo/vector-icons';
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 
 export default function TabLayout() {
     return (
         <Tabs
             screenOptions={{
-                tabBarActiveTintColor: '#ffd33d',
+                tabBarActiveTintColor: '#118EEA',
                 headerStyle: {
-                    backgroundColor: '#25292e',
+                    backgroundColor: '#fff',
                 },
                 headerShadowVisible: false,
-                headerTintColor: '#fff',
+                headerTintColor: '#000',
                 tabBarStyle: {
-                    backgroundColor: '#25292e',
+                    backgroundColor: '#fff',
                 }
             }}
         >
             <Tabs.Screen
                 name="index"
                 options={{
-                    title: 'Home',
+                    title: 'Beranda',
                     tabBarIcon: ({ color, focused }) => (
                         <Ionicons name={focused ? 'home-sharp' : 'home-outline'} color={color} size={24} />
                     ),
                 }}
             />
             <Tabs.Screen
+                name="schedule"
+                options={{
+                    title: 'Jadwal',
+                    tabBarIcon: ({ color, focused }) => (
+                        <FontAwesome5 name={focused ? 'history' : 'history'} color={color} size={24} />
+                    ),
+                }}
+            />
+            <Tabs.Screen
+                name="history"
+                options={{
+                    title: 'Riwayat',
+                    tabBarIcon: ({ color, focused }) => (
+                        <FontAwesome5 name={focused ? 'history' : 'history'} color={color} size={24} />
+                    ),
+                }}
+            />
+            <Tabs.Screen
                 name="about"
                 options={{
-                    title: 'About',
+                    title: 'Keluar',
                     tabBarIcon: ({ color, focused }) => (
-                        <Ionicons name={focused ? 'information-circle' : 'information-circle-outline'} color={color} size={24} />
+                        <MaterialIcons name={focused ? 'logout' : 'logout'} color={color} size={24} />
                     ),
                 }}
             />

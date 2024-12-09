@@ -1,9 +1,9 @@
 import {Text, View, StyleSheet} from 'react-native'
 
-export default function AboutScreen() {
+export default function ScheduleScreen() {
     return (
         <View style={styles.container}>
-            <Text style={styles.text}>About screen</Text>
+            <Text style={styles.text}>Schedule screen</Text>
         </View>
     )
 }
