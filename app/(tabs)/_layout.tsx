@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Tabs } from 'expo-router';
+import { Tabs, Slot } from 'expo-router';
 import { Ionicons } from "@expo/vector-icons";
 import { FontAwesome } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
@@ -19,7 +19,7 @@ export default function TabLayout() {
             console.error("Error during logout:", error);
         });
     };
-    
+
 
 
     const ExitModal = () => (
@@ -122,7 +122,7 @@ export default function TabLayout() {
                                     <Text style={{
                                         color: accessibilityState?.selected ? '#0088FF' : '#999',
                                         fontSize: 11,
-                                        marginTop:52,
+                                        marginTop: 52,
                                     }}>
                                         Absent
                                     </Text>
@@ -181,7 +181,7 @@ export default function TabLayout() {
                                     <Text
                                         style={{
                                             fontSize: 11,
-                                            marginTop:13,
+                                            marginTop: 13,
                                             color: accessibilityState?.selected ? '#FF4D4D' : '#999',
                                         }}
                                     >

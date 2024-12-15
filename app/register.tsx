@@ -46,7 +46,7 @@ export default function RegisterScreen() {
                 title="Lanjut"
                 onPress={() => {
                     console.log('Login:', { username, password });
-                    router.push('/(tabs)');
+                    router.push('/camera-register');
                 }}
             />
             <TouchableOpacity onPress={() => router.push('/login')}>
