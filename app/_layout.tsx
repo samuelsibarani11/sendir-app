@@ -11,9 +11,8 @@ export default function RootLayout() {
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        // Periksa token login
         const userToken = await AsyncStorage.getItem("userToken");
-        setIsLoggedIn(!!userToken); // True jika token ada
+        setIsLoggedIn(!!userToken); 
       } catch (error) {
         console.error("Gagal memeriksa token login:", error);
       } finally {
@@ -33,18 +32,24 @@ export default function RootLayout() {
 
   if (!isLoggedIn) {
     return (
-      <Stack screenOptions={{ headerShown: false }}> {/* Hide headers for login flow */}
-        <Stack.Screen name="login" options={{ headerShown: false }} /> {/* No back button */}
+      <Stack screenOptions={{ headerShown: false }}> 
+        <Stack.Screen name="login" options={{ headerShown: false }} /> 
       </Stack>
     );
   }
 
   return (
-    <Stack>
-      <Stack.Screen name="camera-register" options={{ headerShown: false }} />
-      <Stack.Screen name="register" options={{ headerShown: false }} />
-      <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-      <Stack.Screen name="+not-found" options={{ headerShown: false }} />
+    <Stack screenOptions={{ headerShown: false }}>
+      {!isLoggedIn ? (
+        <Stack.Screen name="login" />
+      ) : (
+        <>
+          <Stack.Screen name="camera-register" />
+          <Stack.Screen name="register" />
+          <Stack.Screen name="(tabs)" />
+          <Stack.Screen name="+not-found" />
+        </>
+      )}
     </Stack>
   );
 }
