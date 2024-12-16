@@ -68,8 +68,9 @@ export default function TabLayout() {
                     headerTintColor: '#000',
                     tabBarStyle: {
                         backgroundColor: '#fff',
-                        height: 100,
+                        height: 80,
                         paddingTop: 5,
+                        paddingBottom: 8,
                     }
                 }}
             >
@@ -207,7 +208,6 @@ const styles = StyleSheet.create({
     },
     modalContainer: {
         width: '100%',
-        height: '28%',
         backgroundColor: '#fff',
         padding: 20,
         elevation: 5,

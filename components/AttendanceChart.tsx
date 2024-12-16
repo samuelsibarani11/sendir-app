@@ -1,58 +1,118 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { PieChart } from 'react-native-chart-kit';
+import { Svg, Circle } from 'react-native-svg';
 
-interface AttendanceChartProps {
-  attendance: number;
+interface AttendanceProps {
+  present: number;
+  late: number;
+  absent: number;
 }
 
-const AttendanceChart: React.FC<AttendanceChartProps> = ({ attendance }) => {
-  const chartData = [
-    { name: 'Hadir', population: 60, color: '#007BFF', legendFontColor: '#007BFF', legendFontSize: 12 },
-    { name: 'Terlambat', population: 20, color: '#FFC107', legendFontColor: '#FFC107', legendFontSize: 12 },
-    { name: 'Tidak Hadir', population: 15, color: '#FF3D00', legendFontColor: '#FF3D00', legendFontSize: 12 },
-  ];
+const AttendanceChart: React.FC<AttendanceProps> = ({ present, late, absent }) => {
+  const circumference = 2 * Math.PI * 80; // Keliling lingkaran
 
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Kehadiran</Text>
-      <PieChart
-        data={chartData}
-        width={300}
-        height={150}
-        chartConfig={{
-          color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
-          strokeWidth: 2,
-        }}
-        accessor="population"
-        backgroundColor="transparent"
-        paddingLeft="15"
-        center={[10, 10]}
-      />
-      <Text style={styles.percentage}>{attendance}%</Text>
-      <Text style={styles.subtitle}>Ayo Tingkatkan Lagi</Text>
+
+      <View style={styles.chartContainer}>
+        <Svg height="200" width="200">
+          <Circle
+            cx="100"
+            cy="100"
+            r="80"
+            stroke="#0099FF"
+            strokeWidth="20"
+            fill="transparent"
+            strokeDasharray={`${(present / 100) * circumference} ${(1 - present / 100) * circumference}`}
+          />
+          <Circle
+            cx="100"
+            cy="100"
+            r="80"
+            stroke="#FF4444"
+            strokeWidth="20"
+            fill="transparent"
+            strokeDasharray={`${(absent / 100) * circumference} ${(1 - absent / 100) * circumference}`}
+            strokeDashoffset={-(present / 100) * circumference}
+          />
+          <Circle
+            cx="100"
+            cy="100"
+            r="80"
+            stroke="#FFA500"
+            strokeWidth="20"
+            fill="transparent"
+            strokeDasharray={`${(late / 100) * circumference} ${(1 - late / 100) * circumference}`}
+            strokeDashoffset={-((present + absent) / 100) * circumference}
+          />
+        </Svg>
+        <View style={styles.percentageContainer}>
+          <Text style={styles.percentage}>70%</Text>
+          <Text style={styles.subtitle}>Ayo Tingkatkan lagi</Text>
+        </View>
+      </View>
+
+
+      <View style={styles.legend}>
+        <View style={styles.legendItem}>
+          <View style={[styles.legendColor, { backgroundColor: '#0099FF' }]} />
+          <Text>Hadir {present}%</Text>
+        </View>
+        <View style={styles.legendItem}>
+          <View style={[styles.legendColor, { backgroundColor: '#FFA500' }]} />
+          <Text>Terlambat {late}%</Text>
+        </View>
+        <View style={styles.legendItem}>
+          <View style={[styles.legendColor, { backgroundColor: '#FF4444' }]} />
+          <Text>Tidak Hadir {absent}%</Text>
+        </View>
+      </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: 'center',
-    padding: 16,
+    padding: 20,
+    marginBottom: 40,
   },
   title: {
-    fontSize: 16,
+    fontSize: 24,
     fontWeight: 'bold',
-    marginBottom: 8,
+    marginBottom: 20,
+  },
+  chartContainer: {
+    alignItems: 'center',
+    position: 'relative',
+  },
+  percentageContainer: {
+    position: 'absolute',
+    top: '37%',
+    alignItems: 'center',
   },
   percentage: {
     fontSize: 24,
     fontWeight: 'bold',
-    marginVertical: 8,
   },
   subtitle: {
-    fontSize: 14,
-    color: '#666666',
+    fontSize: 12,
+    color: 'gray',
+  },
+  legend: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    marginTop: 20,
+  },
+  legendItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  legendColor: {
+    width: 10,
+    height: 10,
+    borderRadius: 5,
+    marginRight: 5,
   },
 });
 
