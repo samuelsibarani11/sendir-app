@@ -1,6 +1,7 @@
 import React from 'react';
-import { View, Text, Image, StyleSheet } from 'react-native';
+import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import { useRouter } from 'expo-router';
 
 interface HeaderProps {
   name: string;
@@ -9,16 +10,26 @@ interface HeaderProps {
 }
 
 const Header: React.FC<HeaderProps> = ({ name, location, avatarUrl }) => {
+  const router = useRouter();
+
   return (
     <View style={styles.container}>
       <View style={styles.headerContent}>
         <View style={styles.textContainer}>
-          <Text style={styles.greeting}>Hai, <Text style={styles.boldText}>{name}</Text></Text>
+          <Text style={styles.greeting}>
+            Hai, <Text style={styles.boldText}>{name}</Text>
+          </Text>
           <Text style={styles.appName}>Senyumku Absenku</Text>
         </View>
         <View style={styles.rightContent}>
-          <Icon name="notifications-outline" size={24} color="white" style={styles.notificationIcon} />
-          <Image source={{ uri: avatarUrl }} style={styles.avatar} />
+          {/* Navigasi ke halaman notifikasi */}
+          <TouchableOpacity onPress={() => router.push('/notifications')}>
+            <Icon name="notifications-outline" size={24} color="white" style={styles.notificationIcon} />
+          </TouchableOpacity>
+          {/* Navigasi ke halaman profile settings */}
+          <TouchableOpacity onPress={() => router.push('/profile-settings')}>
+            <Image source={{ uri: avatarUrl }} style={styles.avatar} />
+          </TouchableOpacity>
         </View>
       </View>
 
@@ -34,11 +45,11 @@ const styles = StyleSheet.create({
     paddingVertical: 20,
     paddingHorizontal: 20,
     backgroundColor: '#0099FF',
-    height: 250,
+    height: 280,
     position: 'relative',
   },
   headerContent: {
-    paddingTop:60,
+    paddingTop: 80,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -62,7 +73,7 @@ const styles = StyleSheet.create({
   location: {
     color: 'white',
     fontSize: 14,
-    marginTop: 50,
+    marginTop: 60,
     textAlign: 'right',
     paddingHorizontal: 5,
   },

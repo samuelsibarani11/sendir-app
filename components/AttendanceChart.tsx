@@ -53,19 +53,22 @@ const AttendanceChart: React.FC<AttendanceProps> = ({ present, late, absent }) =
         </View>
       </View>
 
-
       <View style={styles.legend}>
-        <View style={styles.legendItem}>
-          <View style={[styles.legendColor, { backgroundColor: '#0099FF' }]} />
-          <Text>Hadir {present}%</Text>
+        <View style={styles.legendRow}>
+          <View style={styles.legendItem}>
+            <View style={[styles.legendColor, { backgroundColor: '#0099FF' }]} />
+            <Text>Hadir {present}%</Text>
+          </View>
+          <View style={styles.legendItem}>
+            <View style={[styles.legendColor, { backgroundColor: '#FF4444' }]} />
+            <Text>Tidak Hadir {absent}%</Text>
+          </View>
         </View>
-        <View style={styles.legendItem}>
-          <View style={[styles.legendColor, { backgroundColor: '#FFA500' }]} />
-          <Text>Terlambat {late}%</Text>
-        </View>
-        <View style={styles.legendItem}>
-          <View style={[styles.legendColor, { backgroundColor: '#FF4444' }]} />
-          <Text>Tidak Hadir {absent}%</Text>
+        <View style={styles.legendRow}>
+          <View style={styles.legendItem}>
+            <View style={[styles.legendColor, { backgroundColor: '#FFA500' }]} />
+            <Text>Terlambat {late}%</Text>
+          </View>
         </View>
       </View>
     </View>
@@ -100,9 +103,12 @@ const styles = StyleSheet.create({
     color: 'gray',
   },
   legend: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
     marginTop: 20,
+  },
+  legendRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 10,
   },
   legendItem: {
     flexDirection: 'row',

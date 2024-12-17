@@ -30,7 +30,7 @@ const index: React.FC = () => {
           avatarUrl="https://via.placeholder.com/150"
           />
         <ScheduleList schedules={schedules} />
-        <AttendanceChart present={60} late={20} absent={15} />
+        <AttendanceChart present={60} late={20} absent={20} />
       </ScrollView>
     </SafeAreaView>
   );
